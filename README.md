@@ -8,6 +8,11 @@ The code and dataset for "HOLMES and WATSON: A New Perspective on Website Finger
 
 **This repository currently provides the core code for H123 fingerprinting, including fingerprint extraction and construction, and website identification using fingerprints. The complete code (including performance evaluation in various scenarios, plotting, etc.) will be open-sourced after the results of the paper are given.**
 
+The figure below shows the specific manifestations of the proposed H123 fingerprint on the most popular websites, indicating that compared to traditional website fingerprints (such as using hundreds of statistical features or packet length sequences), the H123 fingerprint is visually concise, information-rich, more powerful, and exhibits clear distinguishability.
+<p align="center">
+  <img src="images/H123_sample.png" alt="My Image" width="550">
+</p>
+
 ⚠️ The code is intended for RESEARCH PURPOSES ONLY! ⚠️
 
 ## Repositories Organization
