@@ -1,5 +1,5 @@
 Base:
-  OS: 'Windows' # 'Linux' or 'Windows'
+  OS: 'Linux' # 'Linux' or 'Windows'
 
 H123_fingerprint:
   max_len: 50
