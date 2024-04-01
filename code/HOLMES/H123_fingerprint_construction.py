@@ -1,5 +1,4 @@
 import collect_pcap_log
-import os
 import process_log
 import process_pcap
 import H12_version_distiction
@@ -8,15 +7,18 @@ import FSM_H2
 import FSM_H3
 
 import numpy as np
+import yaml
+import json
+import os
 
 
 def fingerprint_extract(URL):
     # visiting, collecting and saving pcap+log
     collect_pcap_log.collect_both(URL)
 
-    IP_filter = process_log.get_IP_filter('../result/log/'+URL.split('//')[1].replace('.', '_')+'.csv')
+    IP_filter = process_log.get_IP_filter('../../result/log/'+URL.split('//')[1].replace('.', '_')+'.csv')
 
-    flow_dict = process_pcap.split_flow(file_path='../result/pcap/'+URL.split('//')[1].replace('.', '_')+'.pcap', ip_filter=IP_filter)
+    flow_dict = process_pcap.split_flow(file_path='../../result/pcap/'+URL.split('//')[1].replace('.', '_')+'.pcap', ip_filter=IP_filter)
 
     key_list = list(flow_dict.keys())
 
@@ -53,12 +55,21 @@ def fingerprint_extract(URL):
 
     predict_resource_num_list = [item for item in predict_resource_num_list if item != 0]
     predict_resource_httpv_list = [item for item in predict_resource_httpv_list if item == 'http/1.1' or item == 'h2' or item == 'h3']
-    # os.system('rm -rf ./result/*')
+    # os.system('rm -rf ../result/log/*')
+    # os.system('rm -rf ../result/pcap/*')
     return predict_resource_num_list, predict_resource_httpv_list
 
 
-def H123_fingerprint_construct(resource_num_list, resource_httpv_list):
-    resource_num_list = np.array(resource_num_list)
+def H123_fingerprint_construct(URL):
+    # load config
+    with open('../config.yaml', 'r') as configfile:
+        config = yaml.safe_load(configfile)
+
+    max_len = config['H123_fingerprint']['max_len']
+
+    resource_num_list, resource_httpv_list = fingerprint_extract(URL)
+
+    resource_num_list = np.array(resource_num_list[:max_len])
 
     http1_mask = np.array([1 if item == 'http/1.1' else 0 for item in resource_httpv_list])
     http2_mask = np.array([1 if item == 'h2' else 0 for item in resource_httpv_list])
@@ -73,10 +84,17 @@ def H123_fingerprint_construct(resource_num_list, resource_httpv_list):
     return H123_fingerprint
 
 
-if __name__ == '__main__':
-    r_num, r_version = fingerprint_extract('http://google.com')
+def H123_fingerprint_construct_save(URL):
+    H123_fingerprint = H123_fingerprint_construct(URL).tolist()
 
-    print(H123_fingerprint_construct(r_num, r_version))
+    # save as json
+    with open('../../result/H123_fingerprint/'+URL.split('//')[1].replace('.', '_')+'.json', 'w') as f:
+        json.dump(H123_fingerprint, f)
+
+
+if __name__ == '__main__':
+    URL = 'http://cloudflare.com'
+    H123_fingerprint_construct_save(URL)
 
 
 

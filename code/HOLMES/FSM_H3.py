@@ -4,13 +4,10 @@ from scapy.all import *
 
 class H3FSM:
     resource_produce = 0
-
     def produce(self):
         self.resource_produce += 1
-
     def show_result(self):
         return max(self.resource_produce, 0)
-
 
 def check_with_h3fsm(packets):
     h3fsm = H3FSM()

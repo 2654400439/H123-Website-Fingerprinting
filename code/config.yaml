@@ -1,9 +1,8 @@
 Base:
   OS: 'Windows' # 'Linux' or 'Windows'
-  key2: value2
-  key3: value3
 
-Section2:
-  key1: value1
-  key2: value2
-  key3: value3
+H123_fingerprint:
+  max_len: 50
+  LCSS_sim_threshold: 0.24
+  candidate_num: 8
+  distance_measurement_weight: 0.5

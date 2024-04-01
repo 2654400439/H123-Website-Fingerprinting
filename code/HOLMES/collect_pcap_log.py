@@ -19,7 +19,7 @@ def collect_log(url: str):
     chrome_options = webdriver.ChromeOptions()
 
     chrome_options.binary_location = "C:\Program Files\Google\Chrome\chrome-win64-v119\chrome-win64\chrome.exe"
-    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument(
@@ -37,15 +37,16 @@ def collect_log(url: str):
         time.sleep(5)
 
         browser_log = driver.get_log('performance')
-
-        driver.quit()
     except TimeoutException as e:
         error = str(e).split('(Session info')[0]
+        browser_log = driver.get_log('performance')
     except WebDriverException as e:
         error = str(e).split('(Session info')[0]
+    finally:
+        driver.quit()
 
     # save log
-    with open('../result/log/'+url.replace('.', '_').split('//')[1]+'.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    with open('../../result/log/'+url.replace('.', '_').split('//')[1]+'.csv', 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         for i in range(len(browser_log)):
             writer.writerow(browser_log[i].values())
@@ -55,12 +56,12 @@ def collect_log(url: str):
 
 def collect_both(URL: str):
     # load config
-    with open('config.yaml', 'r') as configfile:
+    with open('../config.yaml', 'r') as configfile:
         config = yaml.safe_load(configfile)
 
     OS = config['Base']['OS']
 
-    capture_cmd = ["tcpdump", "-i", "eth0", "-w", '../result/pcap/' + URL.split('//')[1].replace('.', '_') + '.pcap'] if OS == 'Linux' else ["D:/APP_install/wireshark_new/wireshark_update/Wireshark/tshark.exe", "-i", "\\Device\\NPF_{A6AD4CA8-3FB2-4C9F-95AC-A983CC30701F}", "-w", '../result/pcap/' + URL.split('//')[1].replace('.', '_')+'.pcap', "-f", "tcp port 80 or tcp port 443 or udp port 443"]
+    capture_cmd = ["tcpdump", "-i", "eth0", "-w", '../../result/pcap/' + URL.split('//')[1].replace('.', '_') + '.pcap'] if OS == 'Linux' else ["D:/APP_install/wireshark_new/wireshark_update/Wireshark/tshark.exe", "-i", "\\Device\\NPF_{A6AD4CA8-3FB2-4C9F-95AC-A983CC30701F}", "-w", '../../result/pcap/' + URL.split('//')[1].replace('.', '_')+'.pcap', "-f", "tcp port 80 or tcp port 443 or udp port 443"]
     capture_process = subprocess.Popen(capture_cmd)
 
     collect_log(URL)
@@ -72,5 +73,5 @@ def collect_both(URL: str):
 
 
 if __name__ == '__main__':
-    collect_both('http://google.com')
+    collect_both('http://cloudflare.com')
 

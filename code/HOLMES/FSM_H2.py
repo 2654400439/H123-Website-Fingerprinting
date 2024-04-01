@@ -5,16 +5,12 @@ from scapy.all import *
 class H2FSM:
     resource_produce = -2
     resource_consume = -1
-
     def produce(self):
         self.resource_produce += 1
-
     def consume(self):
         self.resource_consume += 1
-
     def show_result(self):
         return max(self.resource_produce, 0)
-
 
 def check_with_h2fsm(packets):
     h2fsm = H2FSM()

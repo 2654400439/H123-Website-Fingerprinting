@@ -4,13 +4,10 @@ from scapy.all import *
 
 class H1FSM:
     resource_num = 0
-
     def count_rs_num(self):
         self.resource_num += 1
-
     def show_rs_num(self):
         return self.resource_num
-
 
 def check_with_h1fsm(packets):
     h1fsm = H1FSM()
