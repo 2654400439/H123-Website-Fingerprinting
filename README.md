@@ -39,3 +39,6 @@ Please download the complete version of Chrome and chromedriver, and then change
 ### Setup Packet Capturer
 Just make sure you have tcpdump or tshark installed on your system to run properly, and specify the network card to trap packets if necessary. These you can configure in *Code-HOLMES-collect_pcap_log.py*.
 
+## Website Fingerprinting
+Run *Code-WATSON-val_with_dataset.py* to test the effectiveness of the website fingerprinting attack. Meanwhile, you can modify the hyperparameters used by this method in *Code-config.yaml*.
+
