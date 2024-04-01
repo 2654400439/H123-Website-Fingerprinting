@@ -18,7 +18,7 @@ def collect_log(url: str):
 
     chrome_options = webdriver.ChromeOptions()
 
-    chrome_options.binary_location = "C:\Program Files\Google\Chrome\chrome-win64-v119\chrome-win64\chrome.exe"
+    chrome_options.binary_location = "/path/chrome.exe"
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
@@ -27,7 +27,7 @@ def collect_log(url: str):
     chrome_options.add_argument("--disable-cache")
     chrome_options.add_argument("--disk-cache-size=0")
 
-    service = Service("C:\Program Files\Google\Chrome\chromedriver-win64\chromedriver-win64\chromedriver.exe")
+    service = Service("/path/chromedriver.exe")
 
     browser_log = dict()
     try:
@@ -61,7 +61,7 @@ def collect_both(URL: str):
 
     OS = config['Base']['OS']
 
-    capture_cmd = ["tcpdump", "-i", "eth0", "-w", '../../result/pcap/' + URL.split('//')[1].replace('.', '_') + '.pcap'] if OS == 'Linux' else ["D:/APP_install/wireshark_new/wireshark_update/Wireshark/tshark.exe", "-i", "\\Device\\NPF_{A6AD4CA8-3FB2-4C9F-95AC-A983CC30701F}", "-w", '../../result/pcap/' + URL.split('//')[1].replace('.', '_')+'.pcap', "-f", "tcp port 80 or tcp port 443 or udp port 443"]
+    capture_cmd = ["tcpdump", "-i", "eth0", "-w", '../../result/pcap/' + URL.split('//')[1].replace('.', '_') + '.pcap'] if OS == 'Linux' else ["/path/tshark.exe", "-i", "\\Device\\NPF_{A6AD4CA8-3FB2-4C9F-95AC-A983CC30701F}", "-w", '../../result/pcap/' + URL.split('//')[1].replace('.', '_')+'.pcap', "-f", "tcp port 80 or tcp port 443 or udp port 443"]
     capture_process = subprocess.Popen(capture_cmd)
 
     collect_log(URL)
