@@ -13,7 +13,7 @@ The figure below shows the specific manifestations of the proposed H123 fingerpr
   <img src="images/H123_sample.png" alt="My Image" width="550">
 </p>
 
-⚠️ The code is intended for RESEARCH PURPOSES ONLY! ⚠️
+⚠️ The code is intended for RESEARCH PURPOSES ONLY! ⚠️ 
 
 ## Repositories Organization
 *Code* provides the core code of this work, which contains three parts are HOLMES, WATSON and configuration file. 
