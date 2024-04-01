@@ -26,4 +26,16 @@ The figure below shows the specific manifestations of the proposed H123 fingerpr
 *Images* contains images used as an introduction to better understand this work.
 
 ## Setup
+With python3 enviroment, please make sure that you have the necessary libraries installed to run your code, using the following command
+
+```bash
+pip install -r requirements.txt
+```
+
+Now you can recognize websites based on the built H123 fingerprint dataset, if you wish to collect and extract H123 website fingerprints by yourself, you still need to do the following configurations.
+### Setup Browser and Driver
+Please download the complete version of Chrome and chromedriver, and then change the program path in *Code-HOLMES-collect_pcap_log.py*.
+
+### Setup Packet Capturer
+Just make sure you have tcpdump or tshark installed on your system to run properly, and specify the network card to trap packets if necessary. These you can configure in *Code-HOLMES-collect_pcap_log.py*.
 
