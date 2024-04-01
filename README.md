@@ -6,4 +6,6 @@
 The code and dataset for "HOLMES and WATSON: A New Perspective on Website Fingerprinting through HTTP Version Parallelism"
 
 
-**We are working on uploading the code and editing the user manual. This is expected to be done by April 1st.**
+**This repository currently provides the core code for H123 fingerprinting, including fingerprint extraction and construction, and website identification using fingerprints. The complete code (including performance evaluation in various scenarios, plotting, etc.) will be open-sourced after the results of the paper are given.**
+
+⚠️ The code is intended for RESEARCH PURPOSES ONLY! ⚠️
