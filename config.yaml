@@ -1,0 +1,15 @@
+Data_Collection:
+  chrome: "./chrome/chrome-linux64/chrome"
+  chrome_driver: "./chrome/chromedriver-linux64/chromedriver"
+  chrome_legacy: "### your file path"
+  chrome_legacy_driver: "### your file path"
+  firefox: "### your file path"
+  firefox_driver: "### your file path"
+
+  network_interface: "eth0"
+
+H123_fingerprint:
+  max_len: 50
+  LCSS_sim_threshold: 0.24
+  candidate_num: 10
+  distance_measurement_weight: 0.5
